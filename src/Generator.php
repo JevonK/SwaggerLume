@@ -10,6 +10,9 @@ class Generator
     {
         $appDir = config('swagger-lume.paths.annotations');
         $docDir = config('swagger-lume.paths.docs');
+        if (!is_writable($docDir)) {
+            return 'Storage/api-docs folder does not have access rights.';
+        }
         if (! File::exists($docDir) || is_writable($docDir)) {
             // delete all existing documentation
             if (File::exists($docDir)) {
